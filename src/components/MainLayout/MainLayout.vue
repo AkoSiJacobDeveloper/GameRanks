@@ -1,5 +1,5 @@
 <template>
-  <LandingPage />
+  <router-view></router-view>
 </template>
 
 <script>

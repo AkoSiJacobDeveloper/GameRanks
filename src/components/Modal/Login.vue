@@ -9,33 +9,34 @@
         ></i>
       </div>
       <hr />
-      <form @submit.prevent>
+      <form @submit.prevent="handleLogin">
         <label for="username">Username</label>
         <input
           type="text"
           id="username"
-          name="username"
+          v-model="form.username"
           placeholder="Username"
-          class="form-control my-1 p-3"
+          class="form-control my-1 p-3 text-white"
         />
 
         <label for="password">Password</label>
         <input
           type="password"
           id="password"
-          name="password"
+          v-model="form.password"
           placeholder="Password"
-          class="form-control my-1 p-3"
+          class="form-control my-1 p-3 text-white"
         />
 
         <LoginAdminBtn />
       </form>
+      <p v-if="errorMessage" class="text-danger">{{ errorMessage }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import LoginAdminBtn from '../Buttons/LoginAdminBtn.vue'
+import LoginAdminBtn from "../Buttons/LoginAdminBtn.vue";
 
 export default {
   components: { LoginAdminBtn },
@@ -45,7 +46,52 @@ export default {
       required: true,
     },
   },
-}
+  data() {
+    return {
+      form: {
+        username: "",
+        password: "",
+      },
+      errorMessage: "",
+    };
+  },
+  methods: {
+    handleLogin() {
+      const adminUsername = localStorage.getItem("adminUsername");
+      const adminPassword = localStorage.getItem("adminPassword");
+      
+      if (
+        this.form.username === adminUsername &&
+        this.form.password === adminPassword
+      ) {
+        localStorage.setItem("isAdminLoggedIn", "true");
+        
+        alert("Login successful!");
+        this.$emit("close-modal");
+        this.$router.push({ name: 'admin-home'});
+      } else {
+        this.errorMessage = "Invalid username or password";
+      }
+    },
+
+    handleLogout() {
+      localStorage.removeItem("isAdminLoggedIn");
+      alert("You have logged out.");
+    }
+  },
+  mounted() {
+    const defaultUsername = "admin";
+    const defaultPassword = "admin123";
+
+    if (!localStorage.getItem("adminUsername")) {
+      localStorage.setItem("adminUsername", defaultUsername);
+      localStorage.setItem("adminPassword", defaultPassword);
+      console.log("Default admin credentials saved to local storage.");
+    } else {
+      console.log("Admin credentials already exist in local storage.");
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>

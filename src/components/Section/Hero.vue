@@ -4,7 +4,7 @@
     <p class="subtext">{{ subtext }}</p>
     <div class="d-flex gap-2">
       <LoginAdmin @open-modal="showModal" />
-      <LoginGuest />
+      <LoginGuest @click="continueAsGuest" />
     </div>
     <Login :is-visible="isModalVisible" @close-modal="hideModal" />
   </section>
@@ -33,6 +33,9 @@ export default {
     hideModal() {
       this.isModalVisible = false
     },
+    continueAsGuest() {
+      this.$router.push({ name: "guest-home"})
+    }
   },
 }
 </script>

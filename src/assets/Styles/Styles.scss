@@ -1,0 +1,17 @@
+$title-font: 'Russo One';
+$headline-font: 'Poppins';
+$texts-font: 'Rethink Sans';
+$header-background: #1e2a47;
+$font-color: #f5f5f5;
+$color-links: #1e90ff;
+$main-bg-color: #121212;
+
+* {
+  box-sizing: border-box;
+  background-color: $main-bg-color;
+  color: $font-color;
+}
+
+::placeholder {
+  color: #fff;
+}

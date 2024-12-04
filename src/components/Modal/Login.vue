@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import LoginAdminBtn from "../Buttons/LoginAdminBtn.vue";
+import LoginAdminBtn from '../Buttons/LoginAdminBtn.vue'
 
 export default {
   components: { LoginAdminBtn },
@@ -49,49 +49,45 @@ export default {
   data() {
     return {
       form: {
-        username: "",
-        password: "",
+        username: '',
+        password: '',
       },
-      errorMessage: "",
-    };
+      errorMessage: '',
+    }
   },
   methods: {
     handleLogin() {
-      const adminUsername = localStorage.getItem("adminUsername");
-      const adminPassword = localStorage.getItem("adminPassword");
-      
-      if (
-        this.form.username === adminUsername &&
-        this.form.password === adminPassword
-      ) {
-        localStorage.setItem("isAdminLoggedIn", "true");
-        
-        alert("Login successful!");
-        this.$emit("close-modal");
-        this.$router.push({ name: 'admin-home'});
+      const adminUsername = localStorage.getItem('adminUsername') || 'admin'
+      const adminPassword = localStorage.getItem('adminPassword') || 'admin123'
+
+      if (this.form.username === adminUsername && this.form.password === adminPassword) {
+        localStorage.setItem('isAdminLoggedIn', 'true')
+        alert('Login successful!')
+        this.$emit('close-modal')
+        this.$router.push({ name: 'admin-home' })
       } else {
-        this.errorMessage = "Invalid username or password";
+        this.errorMessage = 'Invalid username or password'
       }
     },
 
     handleLogout() {
-      localStorage.removeItem("isAdminLoggedIn");
-      alert("You have logged out.");
-    }
+      localStorage.removeItem('isAdminLoggedIn')
+      alert('You have logged out.')
+    },
   },
   mounted() {
-    const defaultUsername = "admin";
-    const defaultPassword = "admin123";
-
-    if (!localStorage.getItem("adminUsername")) {
-      localStorage.setItem("adminUsername", defaultUsername);
-      localStorage.setItem("adminPassword", defaultPassword);
-      console.log("Default admin credentials saved to local storage.");
+    if (!localStorage.getItem('adminUsername')) {
+      localStorage.setItem('adminUsername', 'admin')
+      localStorage.setItem('adminPassword', 'admin123')
+      console.log('Default admin credentials saved to local storage.')
     } else {
-      console.log("Admin credentials already exist in local storage.");
+      console.log('Admin credentials already exist in local storage.')
     }
+
+    console.log('Admin Username:', localStorage.getItem('adminUsername'))
+    console.log('Admin Password:', localStorage.getItem('adminPassword'))
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,20 +1,17 @@
 // firebase.js
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDGNNigIcgPSdPgL1a6l0bY6Zk9tJ9DS8w",
-    authDomain: "game-leaderboard-8170c.firebaseapp.com",
-    projectId: "game-leaderboard-8170c",
-    storageBucket: "game-leaderboard-8170c.firebasestorage.app",
-    messagingSenderId: "102058199339",
-    appId: "1:102058199339:web:397a4db88c8e79386cdd6e"
-};
+  apiKey: 'AIzaSyDrA49Mcu4hxyE1elAwRRQBlzbtZ581UXc',
+  authDomain: 'game-leaderboard-634c6.firebaseapp.com',
+  projectId: 'game-leaderboard-634c6',
+  storageBucket: 'game-leaderboard-634c6.firebasestorage.app',
+  messagingSenderId: '84329848165',
+  appId: '1:84329848165:web:bd3098d7e6dc0b4207158c',
+}
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
 
-// Export Auth
-const auth = getAuth(app);
-
-export { auth };
+export { db }

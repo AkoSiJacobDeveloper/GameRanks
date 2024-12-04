@@ -1,18 +1,11 @@
 <template>
-  <div class="container-fluid">
-    <Header />
-    <main class="container-fluid">
-      <Hero />
-    </main>
-  </div>
+  <header class="container-fluid p-3">
+    <p class="web-title m-0">{{ webTitle }}</p>
+  </header>
 </template>
 
 <script>
-import Hero from '../Section/Hero.vue'
-import Header from '../Header/Header.vue'
-
 export default {
-  components: { Hero, Header },
   data() {
     return {
       webTitle: 'GameRanks',
